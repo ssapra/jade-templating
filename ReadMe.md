@@ -8,6 +8,35 @@ In this lab we will use Express to create [**Node recipes**](http://noderecipes.
 	1. How to write html templates with jade
 	2. How to render a view with a jade template and a model using a route
 
+Throughout the tutorial, you will come across the follow buzzwords.
+
+**Node.js**
+**Express.js**
+**Jade**
+**Stylus**
+**Route**
+**Server**
+**Client**
+**HTTP**
+
+# Let's talk about the Internet
+
+HTTP is a connectionless text based protocol. In a simplified view of the internet, you are either a **client** or a **server**. Clients (web browsers) send requests to web servers for web elements such as web pages and images. After the request is serviced by a server, the connection between client and server across the Internet is disconnected. A new connection must be made for each request.
+
+When you type a URL into a web browser, this is what happens:
+
+1. If the URL contains a domain name, the browser first connects to a domain name server and retrieves the corresponding IP address for the web server. Ex. If I type in google.com, your browser needs to figure out what the IP address is.
+2. The web browser connects to the web server and sends an HTTP request for the desired web page. Ex. Once the browser knows the IP address, it sends the HTTP request to Google.
+3. The web server receives the request and checks for the desired page. If the page exists, the web server sends it back to the client. If the server cannot find the requested page, it will send an HTTP 404 error message. (404 means 'Page Not Found' as anyone who has surfed the web probably knows.) Ex. Google returns a 404 if my request was garbage or it sends me the results of my search for cat pictures.
+4. The web browser receives the page back and the connection is closed. Ex. Chrome receives the results.
+5. The browser then parses through the page and looks for other page elements it needs to complete the web page. These usually include images, applets, etc. Chrome will load the results in the browser window.
+6. For each element needed, the browser makes additional connections and HTTP requests to the server for each element.
+When the browser has finished loading all images, applets, etc. the page will be completely loaded in the browser window. Ex. If Chrome needs to load images or stylesheets or other scripts, it will make subsequent requests to Google.
+
+## What are we doing today?
+
+Today we're going to build an application so that when we go to the browser and type in a url, **our application**, not some Google server sitting off in the desert, will return the data for our HTTP request. We're building our own server that will be designed to return the content that we care about. We're using recipe data to show meals for Barbeque, Dessert, and Brunch.
+
 #Getting Started
 
 ##Using Nitrous.io
@@ -47,11 +76,15 @@ Click the Preview tab and then Port 3000. This will open up a tab with the corre
 
 ### What is Node.js?
 
-To Do
+The main idea of Node.js: use non-blocking, event-driven I/O to remain lightweight and efficient in the face of data-intensive real-time applications that run across distributed devices.
+
+## What is NPM?
+
+NPM is a package manager for Node.js. It allows you to install node modules which are a set of publicly available, reusable components, available through easy installation via an online repository, with version and dependency management
 
 ### What is Express?
 
-To Do
+Express.js is one of the most popular node modules. It is a Sinatra-inspired web development framework for Node.js, and the de-facto standard for the majority of Node.js applications out there today.
 
 ### Jade Files
 
@@ -62,6 +95,16 @@ Jade is a language used to create HTML templates on the server. This allows us t
 Stylus is the Jade for CSS. It allows us to write CSS much easier than the raw CSS language.
 
 ### App.js
+
+Navigate back to the StartProject folder. Exit from the server using Ctrl-c. Now, in the console
+
+```bash
+cd ~/jade-templating
+cd StartProject
+node app.js
+```
+
+On the left side bar, click the refresh button so you can see the tree of files and directories. Click on StartProject and click the app.js file so that we can see the code in that file.
 
 You will notice that there is a considerable amount of stuff in your **app.js** file. Lets take a peek at the setup:
 
