@@ -10,14 +10,14 @@ In this lab we will use Express to create [**Node recipes**](http://noderecipes.
 
 Throughout the tutorial, you will come across the follow buzzwords.
 
-**Node.js**
-**Express.js**
-**Jade**
-**Stylus**
-**Route**
-**Server**
-**Client**
-**HTTP**
+* **Node.js**
+* **Express.js**
+* **Jade**
+* **Stylus**
+* **Route**
+* **Server**
+* **Client**
+* **HTTP**
 
 # Let's talk about the Internet
 
