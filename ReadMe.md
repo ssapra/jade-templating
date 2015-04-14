@@ -10,101 +10,48 @@ In this lab we will use Express to create [**Node recipes**](http://noderecipes.
 
 #Getting Started
 
-## Visual Studio (Windows)
+##Using Nitrous.io
 
-Download and install [Node.js](http://nodejs/org)
+We'll be using [Nitrous](nitrous.io.), which is a cloud application platform that helps you create and configure the infrastructure and services for complex web applications in just seconds. This allows all of us to be working with the same version of software and same operating system to reduce any headaches.
 
-Download and install [Visual Studio](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-web) and [Node Tools for Visual Studio](https://nodejstools.codeplex.com/)
+###Steps###
+####Create an account####
+1. Go to https://www.nitrous.io/
+2. Sign up for free
+3. Confirm your email
 
-To get started open up the [**StartProject/ExpressWebsite.sln**](StartProject/ExpressWebsite.sln) in Visual Studio 2013. You will notice a few things different about this project than before.
+####Create a box####
+4. Open Dashboard
+5. Create a new box
+6. Choose the Node.js template
+7. Name your box whatever you wish
+8. Leave the other default settings
+9. Click Create Box
+10. Wait as it provisions and starts your new IDE
 
-The solution contains a few more things than before:
-
-![](ScreenShots/ss1.png)
-
-Right click on the npm manager and click **'Install Missing npm packages**:
-
-![](ScreenShots/ss0.png)
-
-This is the equivalent of opening the command line at your root folder of your project and doing:
+##Getting the code
 
 ```bash
-npm install
+git clone git@github.com:ssapra/jade-templating.git
 ```
-
-## Visual Studio Online (Mac/Windows/Linux)
-
-[Visual Studio Online](http://azure.microsoft.com/en-us/documentation/videos/building-web-sites-with-visual-studio-online-monaco/) works on all platforms and provides javascript validation, syntax highlting, file diffs and more. It will instantly deploy your app to the cloud.
-
-Get an Azure Account by either getting a [free trial](http://azure.microsoft.com/en-us/pricing/free-trial/), a token from me which looks like this:
-
-![](ScreenShots/ss0-0.png)
-
-If you're working on a Startup signup for [Bizspark](http//bizspark.com) or tweet at me [@sedouard](http://twitter.com/sedouard] with your plan and I'll get you a bizspark token for free Azure usage for 3 years.
-
-
-After you get your subscription create a new website:
-
-![](ScreenShots/ss21.png)
-
-Then go the config tab, select **Edit in Visual Studio Online** to **Enabled**.
-
-![](ScreenShots/ss22.png)
-
-Because you will be starting with the **StartProject** folder, change the virtual directory setting to have **/** point to **\wwwroot\StartProject\:
-
-![](ScreenShots/ss23.png)
-
-Click **save** at the bottom.
-
-Go back to the Dashboard and click **Edit in Visual Studio Online**
-
-Delete **hostingstart.html** and clone this repository.
-
-Clone this repository using the Git menu on the left toolbar:
 
 In the console do:
 
 ```bash
-cd ./StartProject
-npm install
-```
-
-To run the EndProject folder, change the Virtual Directory of **/** to **\wwwroot\EndProject*** and modify the rootlevel **./package.json** **start** property to point to **./EndProject/app.js**:
-
-```json
-
-{
-  "name": "ExpressWebsite",
-  "version": "0.0.0",
-  "description": "ExpressWebsite",
-  "main": "app.js",
-  "author": {
-    "name": "sedouard",
-    "email": ""
-  },
-  "scripts": {
-    "_comment": "ATTENTION: Change to EndProject/app.js to run the finish app!",
-    "start" : "node StartProject/app.js"  
-  }
-}
-
-```
-Click the 'Run Button'
-
-## Command Line + Text Editor (Mac/Windows/Linux)
-
-Download and install [Node.js](http://nodejs/org)
-
-If you just want to do things with a plain old editor like Sublime and command line and run locally, clone this repository navigate to the repository and do:
-
-```bash
-cd ./StartProject
+cd jade-templating
+cd EndProject
 npm install
 node app.js
 ```
+Click the Preview tab and then Port 3000. This will open up a tab with the correct url for your app. This is what the finished product looks like and we'll spend this afternoon building on top of the basic code that I've already provided.
 
-It is also easy to deploy to an Azure Website with github by [linking your github repository](http://irisclasson.com/2014/03/04/node-js-on-azure-websites-in-minutes-deploying-with-github/). Ensure to change your virtual directory as noted in the Visual Studio Online instructions above.
+### What is Node.js?
+
+To Do
+
+### What is Express?
+
+To Do
 
 ### Jade Files
 
@@ -116,7 +63,7 @@ Stylus is the Jade for CSS. It allows us to write CSS much easier than the raw C
 
 ### App.js
 
-You will notice that there is considerably more stuff in your **app.js** than in the last lab. Lets take a peek at the setup:
+You will notice that there is a considerable amount of stuff in your **app.js** file. Lets take a peek at the setup:
 
 The first new thing that happens is we set the views section of the app to the current directory, __dirname/views folder:
 
@@ -127,12 +74,12 @@ The first new thing that happens is we set the views section of the app to the c
 
 We then tell Express that our view engine that we will be using is jade. Express can be used with a variety of view engines, but jade is the most popular choice:
 
-```js	
+```js
 	app.set('view engine', 'jade');
 ```
 
 This will set the favicon of the website to the default express.js image:
-	
+
 ```js
 	app.use(express.favicon());
 ```
@@ -155,7 +102,7 @@ Run the application and you'll see the placeholder 'Express' title:
 
 ##Templating HTML with Jade
 
-[Jade](http://jade-lang.com/reference/) is a simple light-weight html templating engine which makes it easier to write and reuse HTML. 
+[Jade](http://jade-lang.com/reference/) is a simple light-weight html templating engine which makes it easier to write and reuse HTML.
 
 The current solution has 2 jade view files:
 
@@ -184,7 +131,7 @@ html
   body
   block pageContent
 ```
-You can see that the layout.jade sort-of looks like HTML, except there aren't any brackets. Instead jade uses **tabs**. 
+You can see that the layout.jade sort-of looks like HTML, except there aren't any brackets. Instead jade uses **tabs**.
 
 Notice how we have something called **block pageContent**. This tells jade that **layout.jade** will place any block named **pageContent** from an [*extension view*](http://www.devthought.com/code/use-jade-blocks-not-layouts/) in its place.
 
@@ -272,7 +219,7 @@ block pageTitle
   .jumbotron
     h1 Node recipes
     h2 Welcome! Here you will find a variety of scruptious recipes for you to make
-``` 
+```
 Now we should just have the jumbotron:
 
 ![](ScreenShots/ss5.png)
@@ -371,7 +318,7 @@ var router = express.Router();
 
 /* Renders Recipe view */
 router.get('/:id', function(req, res) {
-	
+
 });
 
 module.exports = router;
@@ -388,7 +335,7 @@ var router = express.Router();
 
 /* Renders Recipe view */
 router.get('/:id', function(req, res) {
-	
+
 });
 
 module.exports = router;
@@ -421,7 +368,7 @@ Let's go back and take a look at **data/recipeData.js**:
 ```js
 	/**
     This is the data source for your application. In the real world, you would either get this data from a data base or
-    from an API 
+    from an API
 	**/
 	exports.recipeTypeName = {
 	    bbq : 'Barbeque',
@@ -496,7 +443,7 @@ Let's go back and take a look at **data/recipeData.js**:
 ```
 In lieu of using a data source like a database or an API, we will use this file as our data source for recipes. **recipesData** contains 4 exported properties:
 
-	
+
 1. 	**recipesData.recipeTypeName** - A key/value pair that maps the recipe type name like 'BBQ' to Barbecue
 2. 	**recipesData.bbq** - A collection of Barbecue recipes
 3. 	**recipesData.brunch** - A collection of Brunch recipes
@@ -514,11 +461,11 @@ Now that we have an idea of what our data looks like we can use express to rende
 In the route handler **recipes.js** we will use the **res.render** function will allow us to render a view, with a model to the page:
 ```js
 	var recipes = require('../data/recipesData.js');
-	
+
 	exports.list = function (req, res) {
-	
+
 	    var kind = req.params.id;
-	    
+
 	    res.render('recipes', {
 	        recipes: {
 	            list: recipes[kind],
@@ -648,4 +595,3 @@ This tells mobile browsers that your website is optimized for mobile. You can te
 
 
 That's it! Congratulations you've created your first Node.js website!
-
