@@ -101,6 +101,7 @@ Navigate back to the StartProject folder. Exit from the server using Ctrl-c. Now
 ```bash
 cd ~/jade-templating
 cd StartProject
+npm install
 node app.js
 ```
 
@@ -501,8 +502,7 @@ In the route handler **recipes.js** we will use the **res.render** function will
 ```js
 	var recipes = require('../data/recipesData.js');
 
-	exports.list = function (req, res) {
-
+	router.get('/:id', function (req, res) {
 	    var kind = req.params.id;
 
 	    res.render('recipes', {
@@ -511,7 +511,7 @@ In the route handler **recipes.js** we will use the **res.render** function will
 	            kind: recipes.recipeTypeName[kind]
 	        }
 	    });
-	}
+	});
 ```
 This will render the jade view **recipe** and back that the view with the data in **recipes** object.
 
