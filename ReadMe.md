@@ -76,7 +76,7 @@ Click the Preview tab and then Port 3000. This will open up a tab with the corre
 
 ### What is Node.js?
 
-The main idea of Node.js: use non-blocking, event-driven I/O to remain lightweight and efficient in the face of data-intensive real-time applications that run across distributed devices.
+The main idea of Node.js: use non-blocking, event-driven I/O to remain lightweight and efficient in the face of data-intensive real-time applications that run across distributed devices. Javascript has long been associated with just the browser, making animations smooth and allowing developers to manipulate elements on the page. Node runs javascript on the web server. Instead of an apache webserver listening on a port and serving files, node runs javascript code that listens on ports, makes connections, and sends/receives packets. 
 
 ## What is NPM?
 
