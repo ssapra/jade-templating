@@ -108,10 +108,22 @@ On the left side bar, click the refresh button so you can see the tree of files 
 
 You will notice that there is a considerable amount of stuff in your **app.js** file. Lets take a peek at the setup:
 
-The first new thing that happens is we set the views section of the app to the current directory, __dirname/views folder:
-
+This code is loading the modules that we want for our application.
 ```js
-	//mounts the 'views' directory so that it is reachable by the client
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+```
+This line is loading the routes that the application supports. If we peek in that file, we can see that only the '/' route is supported.
+```js
+var routes = require('./routes/index');
+```
+
+This line is loading the folder that holds all the views that will be **served** to the **client** (browser).
+```js
 	app.set('views', path.join(__dirname, 'views'));
 ```
 
@@ -122,21 +134,13 @@ We then tell Express that our view engine that we will be using is jade. Express
 ```
 
 This will set the favicon of the website to the default express.js image:
-
 ```js
 	app.use(express.favicon());
 ```
 
-We will set that we want to use stylus and that the stylus styling files are in the **public** folder:
-
+Lastly, this line means that the server will be "listening" for your requests from the browser at the port 3000.
 ```js
-	app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-```
-
-Lastly, we set our **public** folder to be publicly accessible by the client. After this call, you can access anything in this folder by browsing to it (such as **/stylesheets/style.styl**)
-
-```js
-	app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', process.env.PORT || 3000);
 ```
 
 Run the application and you'll see the placeholder 'Express' title:
@@ -225,13 +229,13 @@ We can add a new block with a bootstrap [**jumbotron**](http://getbootstrap.com/
 block pageTitle
   .jumbotron
     h1 Node recipes
-    h2 Welcome! Here you will find a variety of scruptious recipes for you to make
+    h2 Welcome! Here you will find a variety of scrumptious recipes for you to make
 ```
 The block keyword doesn't map to anything in HTML and is only used by jade. This jade code translates to this HTML:
 ```html
 	<div class="jumbotron">
 		<h1>Node recipes</h1>
-		<h2>Welcome! Here you will find a variety of scruptious recipes for you to make</h2>
+		<h2>Welcome! Here you will find a variety of scrumptious recipes for you to make</h2>
 	</div>
 ```
 Tabs in jade signify child elements in the HTML. You don't have to worry about closing any tabs. **.jumbotron** could be **div.jumbotron** but jade defaults to the **div** element type if you don't specify one. Jade lets you short hand **class='jumbotron'** by simply just using **.classname** instead.
@@ -350,8 +354,6 @@ To create a new Recipe route add a new javascript file, **recipes.js** to the ro
 
 ![](ScreenShots/ss9.png)
 
-![](ScreenShots/ss10.png)
-
 Create a new route handler
 
 **recipes.js**
@@ -400,12 +402,6 @@ Then add the router that will use the base route '/recipes' as  assign it to the
 The last piece we need is to create a new view template **recipes.jade** file under the **views** folder:
 
 ![](ScreenShots/ss11.png)
-
-
-Your views folder should look like this now:
-
-![](ScreenShots/ss12.png)
-
 
 Let's go back and take a look at **data/recipeData.js**:
 ```js
@@ -521,8 +517,6 @@ This will render the jade view **recipe** and back that the view with the data i
 
 Run the website and you'll notice when you click on any of the navbar items you get a blank page:
 
-![](ScreenShots/ss13.png)
-
 This is because the view template **recipes.jade** is blank.
 
 #Creating the Recipes View Template
@@ -531,13 +525,11 @@ This is the easy part! We've already created our route, and attached our view to
 
 The first thing we need to do is to declare that **recipes.jade** is an *extension view* of **layout.jade**:
 
-**layout.jade**
+**recipes.jade**
 ```jade
 	extends layout
 ```
 Now that we've done this, running the website again will show you that we get the navBar from layout.jade:
-
-![](ScreenShots/ss14.png)
 
 However the page is still blank. First we should add a **pageTitle** block. Layout.jade will place the html in that block first:
 ```jade
@@ -586,15 +578,13 @@ block pageContent
 
   ul
   each recipe in recipes.list
-  //create a new well for each recipe model
+  	//create a new well for each recipe model
     .well
       h2 #{recipe.name}
       img(src='#{recipe.photo}')
 ```
 
 Reload your webpage and you'll see that a well is created to contain the recipe. We also added the photo using another jade variable **#{recipe.photo}** and which pulls the photo from the recipe data model. This is then placed as the **src** attribute to an **img** html element:
-
-![](ScreenShots/ss17.png)
 
 Now let's add the ingredients:
 
@@ -621,8 +611,6 @@ Reload the page again and you'll see that you get the ingredients listed!
 ![](ScreenShots/ss18.png)
 
 Switching between tabs changes the underlying data model and reloads the same template:
-
-![](ScreenShots/ss19.png)
 
 One more thing to note, this page is already **mobile optimized** thanks to bootstrap. This code in your layout.jade does this trick:
 
